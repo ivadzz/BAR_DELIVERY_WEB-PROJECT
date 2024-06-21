@@ -1,0 +1,287 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;600;900&display=swap');
+
+/* Variáveis CSS */
+:root {
+    --fonte: 'Heebo', sans-serif;
+    --branco: #f1f1f1;
+    --preto: #050823;
+    --cinza: #3f404c;
+    --azul-escuro: #050639;
+    --azul: #2ab400;
+    --azul-claro: #3781ff;
+    --azul-claro2: rgba(55, 129, 255, 0.4);
+}
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fonte);
+}
+
+/* Body */ 
+body {
+    background-color: var(--preto);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Círculo */
+.circulo {
+    position: absolute;
+    background-color: var(--azul-claro2);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(100px);
+}
+
+.circulo1 {
+    top: -150px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+}
+
+.circulo2 {
+    bottom: -200px;
+    right: 500px;
+    width: 300px;
+    height: 300px;
+}
+
+/* Header */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 80px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background: linear-gradient(var(--azul), var(--azul-claro));
+    background-clip: text;
+    color: transparent;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.container__imgbox img {
+    width: 650px;
+}
+
+.container__form-login, 
+.container__form-register {
+    width: 600px;
+}
+
+.container__form-login.inativo, 
+.container__form-register.inativo {
+    display: none;
+}
+
+.titulo {
+    color: var(--branco);
+    font-size: 2.5em;
+    font-weight: 600;
+}
+
+.subtitulo {
+    color: var(--branco);
+    font-size: 1.2em;
+    font-weight: lighter;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.caixa-input {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    padding: 10px;
+    outline: 2px solid var(--cinza);
+    border-radius: 8px;
+    gap: 10px;
+    transition: 0.4s;
+}
+
+.caixa-input i {
+    color: var(--cinza);
+    font-size: 1.5em;
+}
+
+.caixa-input input {
+    border: none;
+    color: var(--branco);
+    background-color: transparent;
+    outline: none;
+    font-size: 1.1em;
+    width: 340px;
+}
+
+.caixa-input.focus {
+    outline-color: var(--azul);
+}
+
+.caixa-input.focus i {
+    color: var(--azul);
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.checkbox input {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.checkbox label {
+    font-size: 1em;
+    color: var(--branco);
+    cursor: pointer;
+}
+
+.btn {
+    width: 400px;
+    border: none;
+    font-size: 1.1em;
+    background-color: var(--azul);
+    color: var(--branco);
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: 0.4s;
+}
+
+.btn:hover {
+    background-color: var(--azul-claro);
+}
+
+.link-texto {
+    display: flex;
+    gap: 10px;
+}
+
+.link-texto p {
+    font-size: 1em;
+    color: var(--branco);
+}
+
+.link-texto a {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--azul);
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+.link-texto a:hover {
+    color: var(--azul-claro);
+}
+
+/* Breakpoints */
+
+/* -- Laptops -- */
+@media screen and (max-width: 992px) {
+    .container__imgbox img {
+        width: 500px;
+    }
+}
+
+/* -- Tablets -- */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 40px;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .container__imgbox {
+        margin-top: 80px;
+    }
+
+    .container__imgbox img {
+        width: 400px;
+    }
+
+    .container__form-login,
+    .container__form-register {
+        width: 400px;
+    }
+}
+
+/* -- Celulares -- */
+@media screen and (max-width: 400px) {
+    .circulo1 {
+        top: -200px;
+        right: -150px;
+        width: 300px;
+        height: 300px;
+    }
+
+    .circulo2 {
+        bottom: -250px;
+        right: 200px;
+        width: 200px;
+        height: 200px;
+    }
+
+    header {
+        padding: 20px;
+    }
+
+    .container__imgbox {
+        display: none;
+    }
+
+    .container__form-login,
+    .container__form-register {
+        width: 100%;
+        padding: 40px;
+    }
+
+    .titulo {
+        font-size: 2.2em;
+    }
+
+    .caixa-input, .btn {
+        width: 100%;
+    }
+
+    .caixa-input input {
+        width: 90%;
+    }
+}

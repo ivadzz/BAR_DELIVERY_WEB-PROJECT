@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Delivery - Cardápio</title>
+    
+    <link rel="stylesheet" href="carrinho.css">
+    
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    
+</head>
+<body>
+    
+    <header>
+        
+        <div class="nav container">
+            <a href="/homee" class="logo">BarDelivery</a>
+            
+            <i class='bx bx-shopping-bag' id="cart-icon"></i>
+            
+            <div class="cart">
+                <h2 class="cart-title">Seu Carrinho</h2>
+                
+                <div class="cart-content">
+
+                </div>
+               
+                <div class="total">
+                    <div class="total-title">Total</div>
+                    <div class="total-price">R$0</div>
+                </div>
+             
+                <button type="button" class="btn-buy">Comprar Agora</button>
+                
+                <i class='bx bx-x' id="close-cart"></i>
+
+            </div>
+        </div>
+    </header>
+    
+    <section class="shop container">
+        <h2 class="section-title">Nossos Produtos</h2>
+        
+        <div class="shop-content">
+            
+            <div class="product-box">
+                <img src="img/Caipirinha.jpeg" alt="" class="product-img">
+                <h2 class="product-title">Caipirinha</h2>
+                <span class="price">R$ 15,00</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+            </div>
+           
+            <div class="product-box">
+                <img src="img/hamburguer.jpg" alt="" class="product-img">
+                <h2 class="product-title">Hamburguer</h2>
+                <span class="price">R$25,00</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+            </div>
+           
+            <div class="product-box">
+                <img src="img/whisky5.jpeg" alt="" class="product-img">
+                <h2 class="product-title">Whisky</h2>
+                <span class="price">R$20,00</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+            </div>
+            
+            <div class="product-box">
+                <img src="img/cerveja3.jpeg" alt="" class="product-img">
+                <h2 class="product-title">Cerveja</h2>
+                <span class="price">R$7,99</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+            </div>
+            
+            <div class="product-box">
+                <img src="img/drink2.jpeg" alt="" class="product-img">
+                <h2 class="product-title">Cosmopolitan</h2>
+                <span class="price">R$25,00</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+            </div>
+            
+            <div class="product-box">
+                <img src="img/paratudo.jpeg" alt="" class="product-img">
+                <h2 class="product-title">Paratudo</h2>
+                <span class="price">R$15,00</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+            </div>
+           
+            <div class="product-box">
+                <img src="img/frango_frito.jpeg" alt="" class="product-img">
+                <h2 class="product-title">Frango Frito</h2>
+                <span class="price">R$25,00</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+            </div>
+           
+            <div class="product-box">
+                <img src="img/nachos.jpeg" alt="" class="product-img">
+                <h2 class="product-title">Nachos</h2>
+                <span class="price">R$20,00</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        //  Carrinho
+let cartIcon = document.querySelector("#cart-icon");
+let cart = document.querySelector(".cart");
+let closeCart = document.querySelector("#close-cart");
+// Abrir Carrinho
+cartIcon.onclick = () => {
+  cart.classList.add("active");
+};
+// Fechar Carrinho
+closeCart.onclick = () => {
+  cart.classList.remove("active");
+};
+
+// Funcionalidades do Carrinho JS
+if (document.readyState == "loading") {
+  document.addEventListener("DOMContentLoaded", pronto);
+} else {
+  pronto();
+}
+
+// Função principal
+function pronto() {
+  // Remover itens do carrinho
+  var botoesRemoverCart = document.getElementsByClassName("cart-remove");
+  for (var i = 0; i < botoesRemoverCart.length; i++) {
+    var botao = botoesRemoverCart[i];
+    botao.addEventListener("click", removerItemCarrinho);
+  }
+  // Mudanças na quantidade
+  var inputsQuantidade = document.getElementsByClassName("cart-quantity");
+  for (var i = 0; i < inputsQuantidade.length; i++) {
+    var input = inputsQuantidade[i];
+    input.addEventListener("change", quantidadeAlterada);
+  }
+  // Adicionar ao carrinho
+  var addCart = document.getElementsByClassName("add-cart");
+  for (var i = 0; i < addCart.length; i++) {
+    var botao = addCart[i];
+    botao.addEventListener("click", adicionarAoCarrinho);
+  }
+  // Funcionamento do botão de compra
+  document
+    .getElementsByClassName("btn-buy")[0]
+    .addEventListener("click", botaoComprarClicado);
+}
+// Botão de compra
+function botaoComprarClicado() {
+  alert("Seu pedido foi realizado");
+  var conteudoCarrinho = document.getElementsByClassName("cart-content")[0];
+  while (conteudoCarrinho.hasChildNodes()) {
+    conteudoCarrinho.removeChild(conteudoCarrinho.firstChild);
+  }
+  atualizarTotal();
+}
+
+// Remover itens do carrinho
+function removerItemCarrinho(event) {
+  var botaoClicado = event.target;
+  botaoClicado.parentElement.remove();
+  atualizarTotal();
+}
+// Mudanças na quantidade
+function quantidadeAlterada(event) {
+  var input = event.target;
+  if (isNaN(input.value) || input.value <= 0) {
+    input.value = 1;
+  }
+  atualizarTotal();
+}
+// Adicionar ao carrinho
+function adicionarAoCarrinho(event) {
+  var botao = event.target;
+  var produtosLoja = botao.parentElement;
+  var titulo = produtosLoja.getElementsByClassName("product-title")[0].innerText;
+  var preco = produtosLoja.getElementsByClassName("price")[0].innerText;
+  var imagemProduto = produtosLoja.getElementsByClassName("product-img")[0].src;
+  adicionarProdutoAoCarrinho(titulo, preco, imagemProduto);
+  atualizarTotal();
+}
+function adicionarProdutoAoCarrinho(titulo, preco, imagemProduto) {
+  var caixaCarrinho = document.createElement("div");
+  caixaCarrinho.classList.add("cart-box");
+  var itensCarrinho = document.getElementsByClassName("cart-content")[0];
+  var nomesItensCarrinho = itensCarrinho.getElementsByClassName("cart-product-title");
+  for (var i = 0; i < nomesItensCarrinho.length; i++) {
+    if (nomesItensCarrinho[i].innerText == titulo) {
+      alert("Você já adicionou este item ao carrinho");
+      return;
+    }
+  }
+  var conteudoCaixaCarrinho = `
+                        <img src="${imagemProduto}" alt="" class="cart-img">
+                        <div class="detail-box">
+                            <div class="cart-product-title">${titulo}</div>
+                            <div class="cart-price">${preco}</div>
+                            <input type="number" value="1" class="cart-quantity">
+                        </div>
+                        <!-- Remover do Carrinho -->
+                        <i class='bx bxs-trash-alt cart-remove' ></i>`;
+  caixaCarrinho.innerHTML = conteudoCaixaCarrinho;
+  itensCarrinho.append(caixaCarrinho);
+  caixaCarrinho
+    .getElementsByClassName("cart-remove")[0]
+    .addEventListener("click", removerItemCarrinho);
+  caixaCarrinho
+    .getElementsByClassName("cart-quantity")[0]
+    .addEventListener("change", quantidadeAlterada);
+}
+
+// Atualizar Total
+function atualizarTotal() {
+  var conteudoCarrinho = document.getElementsByClassName("cart-content")[0];
+  var caixasCarrinho = conteudoCarrinho.getElementsByClassName("cart-box");
+  var total = 0;
+  for (var i = 0; i < caixasCarrinho.length; i++) {
+    var caixaCarrinho = caixasCarrinho[i];
+    var elementoPreco = caixaCarrinho.getElementsByClassName("cart-price")[0];
+    var elementoQuantidade = caixaCarrinho.getElementsByClassName("cart-quantity")[0];
+    var preco = parseFloat(elementoPreco.innerText.replace("R$", ""));
+    var quantidade = elementoQuantidade.value;
+    total = total + preco * quantidade;
+  }
+  // Se o preço contiver alguns centavos
+  total = Math.round(total * 100) / 100;
+
+  document.getElementsByClassName("total-price")[0].innerText = "R$" + total;
+}
+
+    </script>
+    
+</body>
+</html>
